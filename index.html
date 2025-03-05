@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="originalurl" placeholder="original url" />
+    <button id="add"></button>
+</body>
+
+<script>
+    let e = document.getElementById("originalurl")
+    document.getElementById("add").addEventListener("click", () => {
+        console.log(e, e.value)
+
+        if (e) {
+            fetch("https://nqzq53pr-3000.use.devtunnels.ms/api/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    origin: e.value
+                })
+            }).then((a) => a.json()).then((b) => console.log(b))
+        }
+    })
+</script>
+
+</html>

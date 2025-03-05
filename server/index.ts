@@ -1,7 +1,7 @@
 import express from "express";
-import fs from "node:fs";
+import fs from "fs";
 import ShortURL from "./handleURL/createURL.js";
-import path from "node:path";
+import path from "path";
 import cors from "cors";
 
 const app = express();
@@ -18,7 +18,7 @@ app.get("*", async (req, res) => {
 	const requestedURL = req.url.split("/")[1];
 
 	const json = JSON.parse(
-		fs.readFileSync("C:/Users/pc/Desktop/url shortener/server/urls.json", {
+		fs.readFileSync("./server/urls.json", {
 			encoding: "utf8",
 		}),
 	);
@@ -38,7 +38,7 @@ app.post("/api/create", async (req, res) => {
 		const url = await ShortURL.create(data.origin);
 
 		const json = JSON.parse(
-			fs.readFileSync("C:/Users/pc/Desktop/url shortener/server/urls.json", {
+			fs.readFileSync("./server/urls.json", {
 				encoding: "utf8",
 			}),
 		);
@@ -49,7 +49,7 @@ app.post("/api/create", async (req, res) => {
 		}
 
 		json[url.getHash] = data.origin;
-		fs.writeFileSync("C:/Users/pc/Desktop/url shortener/server/urls.json", JSON.stringify(json, null, 2), "utf8");
+		fs.writeFileSync("./server/urls.json", JSON.stringify(json, null, 2), "utf8");
 		res.status(200).json({ message: "good" });
 
 		res.redirect(data.origin);

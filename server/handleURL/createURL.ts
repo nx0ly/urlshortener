@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import generateHash from "../generateHash.js";
 
 export default class ShortURL {

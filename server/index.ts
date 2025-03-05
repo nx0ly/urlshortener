@@ -53,15 +53,11 @@ app.post("/api/create", async (req, res) => {
 		res.status(200).json({ message: "good" });
 
 		res.redirect(data.origin);
-
-		return;
 	} else {
 		res.status(400).json({ message: "origin URL is required" });
-
-		return;
 	}
 
-	res.sendStatus(200)
+	//res.sendStatus(200);
 });
 
 app.listen(3000, () => {

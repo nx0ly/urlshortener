@@ -51,6 +51,8 @@ app.post("/api/create", async (req, res) => {
 		json[url.getHash] = data.origin;
 		fs.writeFileSync("C:/Users/pc/Desktop/url shortener/server/urls.json", JSON.stringify(json, null, 2), "utf8");
 		res.status(200).json({ message: "good" });
+
+		res.redirect(data.origin);
 	} else {
 		res.status(400).json({ message: "origin URL is required" });
 	}

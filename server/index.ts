@@ -29,7 +29,7 @@ app.get("*", async (req, res) => {
 		//res.redirect(json[requestedURL]);
 		res.writeHead(301, { Location: json[requestedURL] });
 		res.end();
-		
+
 		return;
 	}
 
@@ -61,8 +61,6 @@ app.post("/api/create", async (req, res) => {
 	} else {
 		res.status(400).json({ ok: false, message: "origin URL is required" });
 	}
-
-	//res.sendStatus(200);
 });
 
 app.listen(3000, () => {

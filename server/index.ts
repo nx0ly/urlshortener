@@ -23,6 +23,8 @@ app.get("*", async (req, res) => {
 		}),
 	);
 
+	console.log(`url requested: ${req.url, requestedURL, json[requestedURL]}`);
+
 	if (json[requestedURL]) {
 		res.redirect(json[requestedURL]);
 		return;
@@ -52,7 +54,7 @@ app.post("/api/create", async (req, res) => {
 		fs.writeFileSync("./server/urls.json", JSON.stringify(json, null, 2), "utf8");
 		res.status(200).json({ ok: true, message: url.getHash });
 
-		//res.redirect(data.origin);
+		res.redirect(data.origin);
 	} else {
 		res.status(400).json({ ok: false, message: "origin URL is required" });
 	}

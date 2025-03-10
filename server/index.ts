@@ -14,8 +14,8 @@ app.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "../", "/index.html"));
 });
 
-app.get("*", async (req, res) => {
-	const requestedURL = req.url.split("/")[1];
+app.get("*:url", async (req, res) => {
+	const requestedURL = req.params.url;
 
 	const json = JSON.parse(
 		fs.readFileSync("./server/urls.json", {
@@ -23,7 +23,7 @@ app.get("*", async (req, res) => {
 		}),
 	);
 
-	console.log(`url requested: ${req.url} ${requestedURL} ${json[requestedURL]}`);
+	console.log(`url requested: ${requestedURL} ${json[requestedURL]}`);
 
 	if (json[requestedURL] !== undefined) {
 		res.redirect(json[requestedURL]);

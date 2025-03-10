@@ -24,7 +24,9 @@ app.get("*", async (req, res) => {
 		}),
 	);
 
-	console.log(`url requested: ${req.url} ${requestedURL} ${json[requestedURL]}`);
+	console.log(
+		`url requested: ${req.url} ${requestedURL} ${json[requestedURL]}`,
+	);
 
 	if (json[requestedURL] !== undefined) {
 		res.writeHead(301, { Location: json[requestedURL] });
@@ -61,7 +63,11 @@ app.post("/api/create", async (req, res) => {
 		}
 
 		json[url.getHash] = data.origin;
-		fs.writeFileSync("./server/urls.json", JSON.stringify(json, null, 2), "utf8");
+		fs.writeFileSync(
+			"./server/urls.json",
+			JSON.stringify(json, null, 2),
+			"utf8",
+		);
 		res.status(200).json({ ok: true, message: url.getHash });
 	} else {
 		res.status(400).json({ ok: false, message: "origin URL is required" });

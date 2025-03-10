@@ -23,7 +23,7 @@ app.get("*", async (req, res) => {
 		}),
 	);
 
-	console.log(`url requested: ${req.url, requestedURL, json[requestedURL]}`);
+	console.log(`url requested: ${req.url} ${requestedURL} ${json[requestedURL]}`);
 
 	if (json[requestedURL]) {
 		res.redirect(json[requestedURL]);

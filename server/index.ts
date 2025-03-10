@@ -50,11 +50,11 @@ app.post("/api/create", async (req, res) => {
 
 		json[url.getHash] = data.origin;
 		fs.writeFileSync("./server/urls.json", JSON.stringify(json, null, 2), "utf8");
-		res.status(200).json({ message: "good" });
+		res.status(200).json({ ok: true, message: url.getHash });
 
-		res.redirect(data.origin);
+		//res.redirect(data.origin);
 	} else {
-		res.status(400).json({ message: "origin URL is required" });
+		res.status(400).json({ ok: false, message: "origin URL is required" });
 	}
 
 	//res.sendStatus(200);

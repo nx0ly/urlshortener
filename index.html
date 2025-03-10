@@ -26,7 +26,11 @@
                 body: JSON.stringify({
                     origin: e.value
                 })
-            }).then((a) => a.json()).then((b) => console.log(b))
+            }).then((a) => a.json()).then((b) => {
+                if(!b.ok) return alert("error");
+                console.log(b);
+                alert("check devtools for shortened url")
+            })
         }
     })
 </script>

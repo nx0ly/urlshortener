@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>URL Shortener</title>
+	<link rel="stylesheet" href="public/styles.css">
 </head>
-
 <body>
-    <input type="text" id="originalurl" placeholder="original url" />
-    <button id="add"></button>
+	<div class="container">
+		<h1>URL Shortener</h1>
+		<form id="urlForm">
+			<input type="text" id="originUrl" name="origin" placeholder="Enter URL" required>
+			<button type="submit">Shorten</button>
+		</form>
+		<p id="message"></p>
+	</div>
+	<script>
+		document.getElementById('urlForm').addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const originUrl = document.getElementById('originUrl').value;
+			const response = await fetch('/api/create', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ origin: originUrl })
+			});
+			const result = await response.json();
+			const message = document.getElementById('message');
+			if (result.ok) {
+				message.textContent = `Shortened URL: ${window.location.href}${result.message}`;
+			} else {
+				message.textContent = `Error: ${result.message}`;
+			}
+		});
+	</script>
 </body>
-
-<script>
-    let e = document.getElementById("originalurl")
-    document.getElementById("add").addEventListener("click", () => {
-        console.log(e, e.value)
-
-        if (e) {
-            fetch("https://urlshortener-production-17d6.up.railway.app/api/create", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    origin: e.value
-                })
-            }).then((a) => a.json()).then((b) => {
-                if(!b.ok) return alert("error");
-                console.log(b);
-                alert("check devtools for shortened url")
-            })
-        }
-    })
-</script>
-
 </html>

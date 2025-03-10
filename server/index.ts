@@ -26,11 +26,12 @@ app.get("*", async (req, res) => {
 	console.log(`url requested: ${req.url} ${requestedURL} ${json[requestedURL]}`);
 
 	if (json[requestedURL]) {
-		res.redirect(json[requestedURL]);
+		res.writeHead(301, { Location: json[requestedURL] });
+		res.end();
 		return;
 	}
 
-	res.sendStatus(200);
+	res.sendStatus(404);
 });
 
 app.post("/api/create", async (req, res) => {
